@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+
 const base = import.meta.env.BASE_URL;
 
 const { title = "Пластический хирург" } = Astro.props;
@@ -58,12 +59,13 @@ const fData = footerData[locale] || footerData.ru;
 <html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
 		<meta name="viewport" content="width=device-width" />
 		<title>{title}</title>
 	</head>
 	<body class="font-sans text-gray-800 bg-gray-50 flex flex-col min-h-screen">
 		
+		<!-- DESKTOP HEADER (Синий) -->
 		<header class="hidden md:flex bg-slate-900 text-white py-4 justify-center items-center gap-10 sticky top-0 z-40 shadow-md relative">
 			<nav class="flex gap-10">
 				{items.map(item => (
@@ -75,17 +77,19 @@ const fData = footerData[locale] || footerData.ru;
 			</div>
 		</header>
 
-		<header class="flex md:hidden bg-white p-4 items-center justify-between shadow-sm sticky top-0 z-40">
+		<!-- MOBILE HEADER (Обновлен: полупрозрачный + выше) -->
+		<header class="flex md:hidden bg-transparent py-5 px-4 items-center justify-between sticky top-0 z-40">
 			<button id="burger-btn" class="text-slate-900 focus:outline-none">
 				<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
 				</svg>
 			</button>
-			<div class="bg-slate-800 rounded-lg p-1">
+			<div class="bg-slate-200/50 rounded-lg p-1">
 				<LanguageSwitcher />
 			</div>
 		</header>
 
+		<!-- MOBILE SLIDE-OUT MENU -->
 		<div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-40 hidden opacity-0 transition-opacity duration-300 md:hidden"></div>
 		<div id="mobile-panel" class="fixed top-0 left-0 h-full w-[260px] bg-slate-900 text-white z-50 transform -translate-x-full transition-transform duration-300 flex flex-col items-center pt-20 md:hidden shadow-2xl">
 			<button id="close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
@@ -98,6 +102,7 @@ const fData = footerData[locale] || footerData.ru;
 			<slot />
 		</main>
 
+		<!-- FOOTER -->
 		<footer class="bg-slate-800 text-slate-300 mt-auto">
 			<div class="max-w-6xl mx-auto px-4 pt-12 pb-8 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 				
@@ -154,18 +159,13 @@ const fData = footerData[locale] || footerData.ru;
 						<div class="flex flex-col space-y-3">
 							<a href="https://t.me/agdezia" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 hover:text-white transition group">
 								<div class="bg-slate-700 p-2 rounded-lg group-hover:bg-blue-500 transition">
-									<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-									</svg>
+									<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
 								</div>
 								<span>@agdezia</span>
 							</a>
-							
 							<a href="https://instagram.com/a.gdezia" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 hover:text-white transition group">
 								<div class="bg-slate-700 p-2 rounded-lg group-hover:bg-pink-600 transition">
-									<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-									</svg>
+									<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
 								</div>
 								<span>@a.gdezia</span>
 							</a>
