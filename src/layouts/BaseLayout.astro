@@ -65,7 +65,7 @@ const fData = footerData[locale] || footerData.ru;
 	</head>
 	<body class="font-sans text-gray-800 bg-gray-50 flex flex-col min-h-screen">
 		
-		<!-- DESKTOP HEADER (Синий) -->
+		<!-- DESKTOP HEADER (Синий, закреплен) -->
 		<header class="hidden md:flex bg-slate-900 text-white py-4 justify-center items-center gap-10 sticky top-0 z-40 shadow-md relative">
 			<nav class="flex gap-10">
 				{items.map(item => (
@@ -77,14 +77,14 @@ const fData = footerData[locale] || footerData.ru;
 			</div>
 		</header>
 
-		<!-- MOBILE HEADER (Обновлен: полупрозрачный + выше) -->
-		<header class="flex md:hidden bg-transparent py-5 px-4 items-center justify-between sticky top-0 z-40">
-			<button id="burger-btn" class="text-slate-900 focus:outline-none">
+		<!-- MOBILE HEADER (Синий, закреплен вверху) -->
+		<header class="flex md:hidden bg-slate-900 text-white py-4 px-4 items-center justify-between sticky top-0 z-40 shadow-md">
+			<button id="burger-btn" class="text-white focus:outline-none">
 				<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
 				</svg>
 			</button>
-			<div class="bg-slate-200/50 rounded-lg p-1">
+			<div class="p-1">
 				<LanguageSwitcher />
 			</div>
 		</header>
