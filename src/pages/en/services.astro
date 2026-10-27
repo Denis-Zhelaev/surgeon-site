@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const services = [
+  { 
+    title: 'Consultation', 
+    desc: 'Initial appointment with the surgeon. Discussion of your expectations, result modeling, and creation of an individual treatment plan.', 
+    img: '/images/services/consultation.png', 
+    link: '/en/services/consultation' 
+  },
+  { 
+    title: 'Eyelids', 
+    desc: 'Upper and lower blepharoplasty. Removal of drooping eyelids, bags, and wrinkles to restore a fresh and open look.', 
+    img: '/images/services/eyelids.png', 
+    link: '/en/services/eyelids' 
+  },
+  { 
+    title: 'Lifting', 
+    desc: 'Endoscopic face and neck lift. A minimally invasive method for correcting age-related changes and restoring a clear facial oval.', 
+    img: '/images/services/lifting.png', 
+    link: '/en/services/lifting' 
+  },
+  { 
+    title: 'Nose', 
+    desc: 'Rhinoplasty. Correction of the shape, size, and proportions of the nose while maintaining natural breathing and facial harmony.', 
+    img: '/images/services/nose.png', 
+    link: '/en/services/nose' 
+  }, 
+  { 
+    title: 'Breast', 
+    desc: 'Augmentation, reduction, or lift. Achieving the perfect shape and volume, taking into account anatomical features.', 
+    img: '/images/services/breast.png', 
+    link: '/en/services/breast' 
+  },
+  { 
+    title: 'Body', 
+    desc: 'Liposuction, abdominoplasty, arm lift. Elimination of local fat deposits and modeling of body contours.', 
+    img: '/images/services/body.png', 
+    link: '/en/services/body' 
+  },
+  { 
+    title: 'Face', 
+    desc: 'Cheiloplasty, otoplasty, contouring. Correction of individual facial features to achieve ideal proportions.', 
+    img: '/images/services/face.png', 
+    link: '/en/services/face' 
+  },
+  { 
+    title: 'General Surgery', 
+    desc: 'Removal of skin neoplasms, scars, and other minor surgical interventions. Safety and aesthetic results.', 
+    img: '/images/services/general.png', 
+    link: '/en/services/general' 
+  },
+];
+---
+
+<BaseLayout title="Services">
+	<div class="py-8">
+		<h1 class="text-4xl md:text-5xl font-medium text-slate-800 mb-12">Services</h1>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+			{services.map(service => (
+				<a href={service.link} class="group flex flex-col items-start text-left">
+					
+					<div class="w-full aspect-[4/3] mb-6 flex items-center justify-center">
+						<img 
+							src={service.img} 
+							alt={service.title} 
+							class="w-full h-full object-contain group-hover:scale-105 transition duration-500 ease-out"
+							onerror="this.style.display='none'"
+						/>
+					</div>
+					
+					<h2 class="text-2xl font-medium text-slate-800 mb-4 group-hover:text-slate-600 transition">{service.title}</h2>
+					
+					<p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6 flex-grow">{service.desc}</p>
+					
+					<span class="text-slate-400 font-medium text-lg border-b border-transparent group-hover:border-slate-400 transition pb-1 mt-auto">
+						Read More
+					</span>
+				</a>
+			))}
+		</div>
+	</div>
+</BaseLayout>

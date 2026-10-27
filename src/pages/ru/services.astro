@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const services = [
+  { title: 'Консультация', desc: 'Первичный прием хирурга. Обсуждение ваших ожиданий, моделирование результата и составление плана операции.', img: '/images/services/consultation.png', link: '/ru/services/consultation' },
+  { title: 'Веки', desc: 'Блефаропластика верхних и нижних век. Устранение нависших век, мешков и морщин для свежего взгляда.', img: '/images/services/eyelids.png', link: '/ru/services/eyelids' },
+  { title: 'Лифтинг', desc: 'Эндоскопическая подтяжка лица и шеи. Малоинвазивный метод коррекции возрастных изменений.', img: '/images/services/lifting.png', link: '/ru/services/lifting' },
+  { title: 'Нос', desc: 'Ринопластика. Коррекция формы, размера и пропорций носа с сохранением естественного дыхания.', img: '/images/services/nose.png', link: '/ru/services/nose' },
+  { title: 'Грудь', desc: 'Увеличение, уменьшение или подтяжка груди. Достижение идеальной формы с учетом анатомии.', img: '/images/services/breast.png', link: '/ru/services/breast' },
+  { title: 'Тело', desc: 'Липосакция, абдоминопластика, подтяжка рук. Устранение жировых отложений и моделирование контуров.', img: '/images/services/body.png', link: '/ru/services/body' },
+  { title: 'Лицо', desc: 'Хейлопластика, отопластика, контурная пластика. Коррекция отдельных черт для идеальных пропорций.', img: '/images/services/face.png', link: '/ru/services/face' },
+  { title: 'Общая хирургия', desc: 'Удаление новообразований кожи, рубцов и другие малые хирургические вмешательства.', img: '/images/services/general.png', link: '/ru/services/general' },
+];
+---
+
+<BaseLayout title="Услуги">
+	<div class="py-8">
+		<h1 class="text-3xl md:text-4xl font-medium text-slate-800 mb-10">Услуги</h1>
+
+		<!-- Уменьшили отступы (gap) и сделали 4 колонки на больших экранах -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+			{services.map(service => (
+				<a href={service.link} class="group flex flex-col h-full text-left">
+					
+					<!-- Фиксированная высота (h-48) и отступ снизу (mb-4) для ровного выравнивания -->
+					<div class="w-full h-48 mb-4 flex items-center justify-center">
+						<img 
+							src={service.img} 
+							alt={service.title} 
+							class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-500 ease-out"
+							onerror="this.style.display='none'"
+						/>
+					</div>
+					
+					<!-- Уменьшили размер шрифта заголовка до text-lg -->
+					<h2 class="text-lg md:text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition">{service.title}</h2>
+					
+					<!-- Уменьшили описание до text-sm -->
+					<p class="text-slate-500 text-sm leading-relaxed mb-4 flex-grow">{service.desc}</p>
+					
+					<!-- Ссылка прижата к низу (mt-auto) и тоже стала меньше -->
+					<span class="text-slate-400 font-medium text-sm border-b border-transparent group-hover:border-slate-400 transition pb-1 mt-auto">
+						Узнать больше
+					</span>
+				</a>
+			))}
+		</div>
+	</div>
+</BaseLayout>

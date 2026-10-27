@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReviewsComponent from '../../components/ReviewsComponent.astro';
+import VideoReviewsComponent from '../../components/VideoReviewsComponent.astro';
+import ExternalReviewsComponent from '../../components/ExternalReviewsComponent.astro';
+---
+
+<BaseLayout title="Reviews">
+	<div class="pt-2">
+		<!-- 1. Photo reviews (Selfies, messengers, social networks) -->
+		<ReviewsComponent />
+		
+		<!-- 2. Video reviews -->
+		<VideoReviewsComponent />
+
+		<!-- 3. Ratings on external platforms (Yandex, 2GIS, ProDoctorov) -->
+		<ExternalReviewsComponent />
+	</div>
+</BaseLayout>

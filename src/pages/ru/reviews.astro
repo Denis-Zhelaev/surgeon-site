@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReviewsComponent from '../../components/ReviewsComponent.astro';
+import VideoReviewsComponent from '../../components/VideoReviewsComponent.astro';
+import ExternalReviewsComponent from '../../components/ExternalReviewsComponent.astro';
+---
+
+<BaseLayout title="Отзывы">
+	<div class="pt-2">
+		<!-- 1. Фото-отзывы (Селфи, мессенджеры, соцсети) -->
+		<ReviewsComponent />
+		
+		<!-- 2. Видеоотзывы -->
+		<VideoReviewsComponent />
+
+		<!-- 3. Рейтинги на внешних площадках (Яндекс, 2ГИС, ПроДокторов) -->
+		<ExternalReviewsComponent />
+	</div>
+</BaseLayout>

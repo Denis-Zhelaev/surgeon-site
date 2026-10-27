@@ -1,0 +1,27 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const currentLocale = Astro.currentLocale || 'ru';
+const currentPath = Astro.url.pathname;
+
+const pathWithoutLocale = currentPath.replace(/^\/(ru|en)/, '') || '/';
+const ruUrl = getRelativeLocaleUrl('ru', pathWithoutLocale);
+const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
+---
+
+<div class="flex items-center gap-1">
+  <a 
+    href={ruUrl} 
+    class:list={[
+      "px-2 py-1 rounded text-sm font-medium transition",
+      currentLocale === 'ru' ? 'bg-white/20 text-white' : 'text-slate-300 hover:text-white'
+    ]}
+  >RU</a>
+  <a 
+    href={enUrl} 
+    class:list={[
+      "px-2 py-1 rounded text-sm font-medium transition",
+      currentLocale === 'en' ? 'bg-white/20 text-white' : 'text-slate-300 hover:text-white'
+    ]}
+  >EN</a>
+</div>

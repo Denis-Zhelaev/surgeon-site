@@ -1,0 +1,146 @@
+---
+const locale = Astro.currentLocale || 'ru';
+
+const t = {
+  ru: {
+    title: 'Видеоотзывы',
+    badge: '[ ПЛЕЙСХОЛДЕР ]',
+  },
+  en: {
+    title: 'Video Reviews',
+    badge: '[ PLACEHOLDER ]',
+  }
+};
+const text = t[locale] || t.ru;
+
+const videos = Array(8).fill(null).map((_, i) => ({ 
+  id: i + 1, 
+  title: `${locale === 'ru' ? 'Видеоотзыв' : 'Video Review'} ${i + 1}`, 
+  src: '' 
+}));
+---
+
+<section id="video-reviews" class="pt-6 pb-4 scroll-mt-24">
+	<div class="max-w-6xl mx-auto px-4">
+		<div class="flex items-baseline gap-3 mb-6">
+			<h2 class="text-3xl md:text-4xl font-bold text-slate-900">{text.title}</h2>
+			<span class="text-xs md:text-sm font-mono text-slate-400 bg-slate-200 px-2 py-1 rounded">{text.badge}</span>
+		</div>
+
+		<div id="video-track" class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 hide-scrollbar scroll-pl-1">
+			{videos.map((video) => (
+				<div 
+					class="video-card snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)] relative bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-200 aspect-[9/16] cursor-pointer flex flex-col items-center justify-center text-slate-400 hover:opacity-90 transition group"
+					data-video-src={video.src}
+				>
+					<div class="absolute inset-0 flex flex-col items-center justify-center bg-slate-800">
+						<div class="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition backdrop-blur-sm">
+							<svg class="w-6 h-6 md:w-8 md:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M8 5v14l11-7z"/>
+							</svg>
+						</div>
+						<span class="text-white font-medium text-xs md:text-sm text-center px-2">{video.title}</span>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<!-- Кнопки (скрыты на мобилках и планшетах) -->
+		<div class="hidden lg:flex justify-center gap-4 mt-4">
+			<button type="button" id="prev-video" class="w-12 h-12 rounded-full bg-slate-200 text-slate-800 flex items-center justify-center transition shadow-sm text-xl font-bold focus:outline-none">
+				&#10094;
+			</button>
+			<button type="button" id="next-video" class="w-12 h-12 rounded-full bg-slate-200 text-slate-800 flex items-center justify-center transition shadow-sm text-xl font-bold focus:outline-none">
+				&#10095;
+			</button>
+		</div>
+	</div>
+</section>
+
+<div id="video-modal" class="fixed inset-0 bg-black/90 z-[100] hidden items-center justify-center p-4">
+	<button id="close-video" class="absolute top-6 right-6 text-white text-4xl hover:text-slate-300 leading-none focus:outline-none">&times;</button>
+	<div class="w-full max-w-md aspect-[9/16] bg-black rounded-lg overflow-hidden relative shadow-2xl">
+		<video id="active-video" class="w-full h-full object-contain" controls playsinline>
+			<source src="" type="video/mp4">
+		</video>
+	</div>
+</div>
+
+<script>
+	const track = document.getElementById('video-track');
+	const prevBtn = document.getElementById('prev-video');
+	const nextBtn = document.getElementById('next-video');
+
+	function updateArrows() {
+		if (!track || !prevBtn || !nextBtn) return;
+		if (track.scrollLeft <= 5) {
+			prevBtn.classList.add('opacity-30', 'cursor-default');
+			prevBtn.classList.remove('hover:bg-slate-300', 'cursor-pointer');
+		} else {
+			prevBtn.classList.remove('opacity-30', 'cursor-default');
+			prevBtn.classList.add('hover:bg-slate-300', 'cursor-pointer');
+		}
+		if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 5) {
+			nextBtn.classList.add('opacity-30', 'cursor-default');
+			nextBtn.classList.remove('hover:bg-slate-300', 'cursor-pointer');
+		} else {
+			nextBtn.classList.remove('opacity-30', 'cursor-default');
+			nextBtn.classList.add('hover:bg-slate-300', 'cursor-pointer');
+		}
+	}
+
+	track?.addEventListener('scroll', updateArrows);
+	window.addEventListener('resize', updateArrows);
+	setTimeout(updateArrows, 100);
+
+	prevBtn?.addEventListener('click', () => {
+		const firstCard = track?.querySelector('.video-card');
+		if (firstCard) {
+			const scrollAmount = firstCard.offsetWidth + 16;
+			track?.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+		}
+	});
+	nextBtn?.addEventListener('click', () => {
+		const firstCard = track?.querySelector('.video-card');
+		if (firstCard) {
+			const scrollAmount = firstCard.offsetWidth + 16;
+			track?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+		}
+	});
+
+	// Модальное окно
+	const modal = document.getElementById('video-modal');
+	const closeBtn = document.getElementById('close-video');
+	const activeVideo = document.getElementById('active-video');
+	const videoCards = document.querySelectorAll('.video-card');
+
+	videoCards.forEach(card => {
+		card.addEventListener('click', () => {
+			const src = card.getAttribute('data-video-src');
+			if (!src) {
+				alert('Видео пока не добавлено.');
+				return;
+			}
+			if (activeVideo) {
+				activeVideo.src = src;
+				modal?.classList.remove('hidden');
+				modal?.classList.add('flex');
+				activeVideo.play();
+			}
+		});
+	});
+
+	function closeModal() {
+		modal?.classList.add('hidden');
+		modal?.classList.remove('flex');
+		if (activeVideo) {
+			activeVideo.pause();
+			activeVideo.src = '';
+		}
+	}
+
+	closeBtn?.addEventListener('click', closeModal);
+	modal?.addEventListener('click', (e) => {
+		if (e.target === modal) closeModal();
+	});
+</script>

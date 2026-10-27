@@ -1,0 +1,27 @@
+---
+const locale = Astro.currentLocale || 'ru';
+
+const t = {
+  ru: {
+    title: 'Запишитесь на консультацию',
+    desc: 'Оставьте свои контакты, и я свяжусь с вами для обсуждения деталей, ответов на вопросы и планирования консультации.',
+    placeholder: '[ ЗДЕСЬ БУДЕТ ФОРМА ЗАЯВКИ ]',
+  },
+  en: {
+    title: 'Book a Consultation',
+    desc: 'Leave your contact details and I will get in touch with you to discuss the details, answer your questions, and schedule a consultation.',
+    placeholder: '[ APPLICATION FORM PLACEHOLDER ]',
+  }
+};
+const text = t[locale] || t.ru;
+---
+
+<section id="contact" class="mt-6 mb-4 bg-slate-100 rounded-2xl p-6 md:p-10 text-center border border-slate-200 shadow-sm">
+	<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3">{text.title}</h2>
+	<p class="text-slate-600 mb-6 max-w-xl mx-auto text-sm md:text-base">
+		{text.desc}
+	</p>
+	<div class="inline-block bg-white border border-dashed border-slate-300 rounded-lg px-10 py-3 text-slate-400 font-medium shadow-sm">
+		{text.placeholder}
+	</div>
+</section>

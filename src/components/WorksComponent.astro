@@ -1,0 +1,165 @@
+---
+const locale = Astro.currentLocale || 'ru';
+
+const t = {
+  ru: {
+    title: 'Мои работы',
+    badge: '[ ПЛЕЙСХОЛДЕР ]',
+    tabs: [
+      { label: 'Веки', cat: 'eyes' },
+      { label: 'Грудь', cat: 'breast' },
+      { label: 'Лицо', cat: 'face' },
+      { label: 'Тело', cat: 'body' }
+    ],
+    before: 'До',
+    after: 'После',
+  },
+  en: {
+    title: 'My Works',
+    badge: '[ PLACEHOLDER ]',
+    tabs: [
+      { label: 'Eyelids', cat: 'eyes' },
+      { label: 'Breast', cat: 'breast' },
+      { label: 'Face', cat: 'face' },
+      { label: 'Body', cat: 'body' }
+    ],
+    before: 'Before',
+    after: 'After',
+  }
+};
+const text = t[locale] || t.ru;
+
+const worksData = [
+  ...Array(8).fill({ cat: 'eyes', title: text.tabs[0].label }),
+  ...Array(8).fill({ cat: 'breast', title: text.tabs[1].label }),
+  ...Array(8).fill({ cat: 'face', title: text.tabs[2].label }),
+  ...Array(8).fill({ cat: 'body', title: text.tabs[3].label }),
+];
+---
+
+<section id="works" class="pt-6 pb-2 scroll-mt-24">
+	<!-- Изменено max-w-6xl на max-w-7xl для увеличения ширины -->
+	<div class="max-w-7xl mx-auto px-4">
+		<div class="flex items-baseline gap-3 mb-6">
+			<h2 class="text-3xl md:text-4xl font-bold text-slate-900">{text.title}</h2>
+			<span class="text-xs md:text-sm font-mono text-slate-400 bg-slate-200 px-2 py-1 rounded">{text.badge}</span>
+		</div>
+		
+		<div class="flex flex-wrap gap-3 mb-8">
+			{text.tabs.map((tab, i) => (
+				<button 
+					type="button"
+					data-category={tab.cat}
+					class:list={[
+						"works-tab px-5 py-2.5 rounded-lg border text-sm font-medium transition shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-400",
+						i === 0 
+							? "bg-slate-900 text-white border-slate-900" 
+							: "bg-white text-slate-600 border-slate-300 hover:bg-slate-50"
+					]}
+				>
+					{tab.label}
+				</button>
+			))}
+		</div>
+
+		<div id="works-track" class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 hide-scrollbar scroll-pl-1">
+			{worksData.map((item, index) => (
+				<div 
+					data-category={item.cat}
+					class:list={[
+						// Изменены пропорции с 2/1 на 4/3 и 3/2 (карточки стали выше)
+						"works-card snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.66rem)] flex rounded-xl overflow-hidden border border-slate-200 aspect-[4/3] sm:aspect-[3/2]",
+						index < 8 ? "flex" : "hidden"
+					]}
+				>
+					<div class="w-1/2 bg-slate-200 flex flex-col items-center justify-center text-slate-500 font-medium border-r border-slate-300 text-center px-1">
+						<span class="text-base md:text-lg">{item.title}</span>
+						<span class="text-sm opacity-70">{text.before}</span>
+					</div>
+					<div class="w-1/2 bg-slate-300 flex flex-col items-center justify-center text-slate-600 font-medium text-center px-1">
+						<span class="text-base md:text-lg">{item.title}</span>
+						<span class="text-sm opacity-70">{text.after}</span>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<div class="hidden lg:flex justify-center gap-4 mt-4">
+			<button type="button" id="prev-works" class="w-12 h-12 rounded-full bg-slate-200 text-slate-800 flex items-center justify-center transition shadow-sm text-xl font-bold focus:outline-none">
+				&#10094;
+			</button>
+			<button type="button" id="next-works" class="w-12 h-12 rounded-full bg-slate-200 text-slate-800 flex items-center justify-center transition shadow-sm text-xl font-bold focus:outline-none">
+				&#10095;
+			</button>
+		</div>
+	</div>
+</section>
+
+<script>
+	const tabs = document.querySelectorAll('.works-tab');
+	const cards = document.querySelectorAll('.works-card');
+	const track = document.getElementById('works-track');
+	const prevBtn = document.getElementById('prev-works');
+	const nextBtn = document.getElementById('next-works');
+
+	function updateArrows() {
+		if (!track || !prevBtn || !nextBtn) return;
+		if (track.scrollLeft <= 5) {
+			prevBtn.classList.add('opacity-30', 'cursor-default');
+			prevBtn.classList.remove('hover:bg-slate-300', 'cursor-pointer');
+		} else {
+			prevBtn.classList.remove('opacity-30', 'cursor-default');
+			prevBtn.classList.add('hover:bg-slate-300', 'cursor-pointer');
+		}
+		if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 5) {
+			nextBtn.classList.add('opacity-30', 'cursor-default');
+			nextBtn.classList.remove('hover:bg-slate-300', 'cursor-pointer');
+		} else {
+			nextBtn.classList.remove('opacity-30', 'cursor-default');
+			nextBtn.classList.add('hover:bg-slate-300', 'cursor-pointer');
+		}
+	}
+
+	tabs.forEach(tab => {
+		tab.addEventListener('click', () => {
+			tabs.forEach(t => {
+				t.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
+				t.classList.add('bg-white', 'text-slate-600', 'border-slate-300', 'hover:bg-slate-50');
+			});
+			tab.classList.remove('bg-white', 'text-slate-600', 'border-slate-300', 'hover:bg-slate-50');
+			tab.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
+
+			const category = tab.getAttribute('data-category');
+			cards.forEach(card => {
+				if (card.getAttribute('data-category') === category) {
+					card.classList.remove('hidden');
+				} else {
+					card.classList.add('hidden');
+				}
+			});
+			if (track) {
+				track.scrollLeft = 0;
+				updateArrows();
+			}
+		});
+	});
+
+	track?.addEventListener('scroll', updateArrows);
+	window.addEventListener('resize', updateArrows);
+	setTimeout(updateArrows, 100);
+
+	prevBtn?.addEventListener('click', () => {
+		const firstCard = track?.querySelector('.works-card:not(.hidden)');
+		if (firstCard) {
+			const scrollAmount = firstCard.offsetWidth + 16;
+			track?.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+		}
+	});
+	nextBtn?.addEventListener('click', () => {
+		const firstCard = track?.querySelector('.works-card:not(.hidden)');
+		if (firstCard) {
+			const scrollAmount = firstCard.offsetWidth + 16;
+			track?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+		}
+	});
+</script>

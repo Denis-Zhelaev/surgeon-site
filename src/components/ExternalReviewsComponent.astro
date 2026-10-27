@@ -1,0 +1,85 @@
+---
+const locale = Astro.currentLocale || 'ru';
+
+const t = {
+  ru: {
+    title: 'Отзывы на внешних площадках',
+    badge: '[ ПЛЕЙСХОЛДЕР ]',
+    yandex: 'Яндекс Карты',
+    gis: '2ГИС',
+    prodoctorov: 'ПроДокторов',
+    rating: '5.0',
+    reviewsCount: '128 отзывов',
+    linkText: 'Читать все отзывы',
+  },
+  en: {
+    title: 'Reviews on External Platforms',
+    badge: '[ PLACEHOLDER ]',
+    yandex: 'Yandex Maps',
+    gis: '2GIS',
+    prodoctorov: 'ProDoctorov',
+    rating: '5.0',
+    reviewsCount: '128 reviews',
+    linkText: 'Read all reviews',
+  }
+};
+const text = t[locale] || t.ru;
+---
+
+<section id="external-reviews" class="pt-4 pb-12">
+	<div class="max-w-6xl mx-auto px-4">
+		<div class="flex items-baseline gap-3 mb-6">
+			<h2 class="text-2xl md:text-3xl font-bold text-slate-900">{text.title}</h2>
+			<span class="text-xs md:text-sm font-mono text-slate-400 bg-slate-200 px-2 py-1 rounded">{text.badge}</span>
+		</div>
+		
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			
+			<!-- Яндекс Карты -->
+			<a href="#" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center text-center hover:shadow-md transition group">
+				<div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4 group-hover:scale-105 transition">
+					<!-- Иконка Яндекса (упрощенная) -->
+					<span class="text-red-500 font-bold text-2xl">Я</span>
+				</div>
+				<h3 class="font-bold text-slate-900 text-lg mb-1">{text.yandex}</h3>
+				<div class="flex items-center gap-1 text-yellow-500 mb-2">
+					<span>★★★★★</span>
+					<span class="text-slate-800 font-bold ml-1">{text.rating}</span>
+				</div>
+				<p class="text-sm text-slate-500 mb-4">{text.reviewsCount}</p>
+				<span class="text-slate-900 font-medium text-sm underline decoration-slate-300 underline-offset-4">{text.linkText}</span>
+			</a>
+
+			<!-- 2ГИС -->
+			<a href="#" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center text-center hover:shadow-md transition group">
+				<div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-4 group-hover:scale-105 transition">
+					<!-- Иконка 2ГИС (упрощенная) -->
+					<span class="text-green-500 font-bold text-xl">2ГИС</span>
+				</div>
+				<h3 class="font-bold text-slate-900 text-lg mb-1">{text.gis}</h3>
+				<div class="flex items-center gap-1 text-yellow-500 mb-2">
+					<span>★★★★★</span>
+					<span class="text-slate-800 font-bold ml-1">{text.rating}</span>
+				</div>
+				<p class="text-sm text-slate-500 mb-4">{text.reviewsCount}</p>
+				<span class="text-slate-900 font-medium text-sm underline decoration-slate-300 underline-offset-4">{text.linkText}</span>
+			</a>
+
+			<!-- ПроДокторов -->
+			<a href="#" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center text-center hover:shadow-md transition group">
+				<div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 group-hover:scale-105 transition">
+					<!-- Иконка ПроДокторов (упрощенная) -->
+					<span class="text-blue-500 font-bold text-xl">ПД</span>
+				</div>
+				<h3 class="font-bold text-slate-900 text-lg mb-1">{text.prodoctorov}</h3>
+				<div class="flex items-center gap-1 text-yellow-500 mb-2">
+					<span>★★★★★</span>
+					<span class="text-slate-800 font-bold ml-1">{text.rating}</span>
+				</div>
+				<p class="text-sm text-slate-500 mb-4">{text.reviewsCount}</p>
+				<span class="text-slate-900 font-medium text-sm underline decoration-slate-300 underline-offset-4">{text.linkText}</span>
+			</a>
+
+		</div>
+	</div>
+</section>

@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorksComponent from '../../components/WorksComponent.astro';
+---
+
+<BaseLayout title="About">
+	<!-- ================= БЛОК 1: ФОТО И ОПИСАНИЕ ================= -->
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-6">
+		
+		<!-- Фото (плейсхолдер) -->
+		<!-- Фото -->
+		<div class="w-full max-w-md mx-auto aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden shadow-md order-1 md:order-2">
+			<img 
+			src="/images/doctor/doctor-photo2.png" 
+			alt="Олег Желаев" 
+			class="w-full h-full object-cover object-center"
+			/>
+		</div>
+
+		<!-- Текстовая часть -->
+		<div class="order-2 md:order-1 space-y-5">
+			<h1 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
+				Oleg Zhelaev — Expert in Aesthetic Surgery
+			</h1>
+			<p class="text-base md:text-lg text-slate-600 leading-relaxed">
+				For over 15 years, I have helped patients achieve harmony and confidence by combining advanced medical technologies with an individual approach. Every operation is an art where there are no compromises, and health and natural results come first.
+			</p>
+			
+			<!-- Кнопка -->
+			<div class="flex justify-center mt-8">
+				<a href="/en/reviews" class="bg-slate-600 text-white w-full sm:w-auto min-w-[280px] px-8 py-3.5 rounded-full text-center font-medium hover:bg-slate-700 transition shadow-md">
+					Read Reviews
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- ================= БЛОК 2: ОБРАЗОВАНИЕ И ОПЫТ ================= -->
+	<div class="mt-12 flex flex-col md:flex-row md:justify-end gap-10 md:gap-20">
+		
+		<!-- Левая колонка: Образование -->
+		<div class="w-full md:w-[45%] text-left">
+			<h2 class="text-2xl font-bold text-slate-900 mb-6 text-center md:text-left">Education</h2>
+			<ul class="space-y-4 text-slate-600 text-sm md:text-base list-disc pl-5">
+				<li>Graduated from <strong>I.M. Sechenov First Moscow State Medical University</strong> with honors.</li>
+				<li>Completed advanced practice at the <strong>State Budgetary Healthcare Institution of the Republic of Mari El "Oncology Dispensary" in Yoshkar-Ola</strong>.</li>
+				<li>Holds <strong>doctoral degrees</strong> in Oncology, Gynecology, Mammology, and Memology.</li>
+				<li>Completed advanced training courses in the <strong>Art of Picking Up Minors</strong> and <strong>Acting</strong>.</li>
+				<li>Regularly speaks at international congresses on plastic surgery.</li>
+			</ul>
+		</div>
+
+		<!-- Правая колонка: Опыт работы -->
+		<div class="w-full md:w-[45%] text-left">
+			<h2 class="text-2xl font-bold text-slate-900 mb-6 text-center md:text-left">Work Experience</h2>
+			<ul class="space-y-5 text-slate-600 text-sm md:text-base">
+				<li class="flex items-start gap-3">
+					<span class="w-2 h-2 rounded-full bg-slate-400 mt-2 shrink-0"></span>
+					<div>
+						<p class="font-medium text-slate-900">Chief Surgeon</p>
+						<p class="text-sm">Mayo Clinic (USA)</p>
+					</div>
+				</li>
+				<li class="flex items-start gap-3">
+					<span class="w-2 h-2 rounded-full bg-slate-400 mt-2 shrink-0"></span>
+					<div>
+						<p class="font-medium text-slate-900">Chief Physician</p>
+						<p class="text-sm">Toronto General Hospital (Canada)</p>
+					</div>
+				</li>
+				<li class="flex items-start gap-3">
+					<span class="w-2 h-2 rounded-full bg-slate-400 mt-2 shrink-0"></span>
+					<div>
+						<p class="font-medium text-slate-900">Chief Surgeon</p>
+						<p class="text-sm">Cleveland Clinic (USA)</p>
+					</div>
+				</li>
+				<li class="flex items-start gap-3">
+					<span class="w-2 h-2 rounded-full bg-slate-400 mt-2 shrink-0"></span>
+					<div>
+						<p class="font-medium text-slate-900">Chief Physician</p>
+						<p class="text-sm">Karolinska University Hospital (Sweden)</p>
+					</div>
+				</li>
+				<li class="flex items-start gap-3">
+					<span class="w-2 h-2 rounded-full bg-slate-400 mt-2 shrink-0"></span>
+					<div>
+						<p class="font-medium text-slate-900">Chief Surgeon</p>
+						<p class="text-sm">Massachusetts General Hospital (USA)</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- ================= БЛОК 3: КАРУСЕЛЬ ДИПЛОМОВ ================= -->
+	<div class="mt-16">
+		<div class="flex flex-col md:flex-row items-center md:items-baseline justify-center md:justify-start gap-3 mb-6">
+			<h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center md:text-left">Diplomas & Certificates</h2>
+			<span class="text-xs md:text-sm font-mono text-slate-400 bg-slate-200 px-2 py-1 rounded">[ PLACEHOLDER ]</span>
+		</div>
+
+		<div id="diplomas-track" class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 hide-scrollbar scroll-pl-1">
+			
+			<!-- 1. Вуз -->
+			<div class="diploma-slide snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.66rem)] bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col aspect-[3/4]">
+				<div class="flex-grow bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 font-medium text-center p-4 border border-slate-200 border-dashed">
+					[ IMAGE PLACEHOLDER ]
+				</div>
+				<p class="text-center font-medium text-slate-800 mt-4 text-sm h-10">Diploma from Sechenov First Moscow State Medical University</p>
+			</div>
+			<!-- 2. Практика -->
+			<div class="diploma-slide snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.66rem)] bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col aspect-[3/4]">
+				<div class="flex-grow bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 font-medium text-center p-4 border border-slate-200 border-dashed">
+					[ IMAGE PLACEHOLDER ]
+				</div>
+				<p class="text-center font-medium text-slate-800 mt-4 text-sm h-10">Practice Certificate (Oncology Dispensary, Yoshkar-Ola)</p>
+			</div>
+			<!-- 3. Онкология -->
+			<div class="diploma-slide snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.66rem)] bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col aspect-[3/4]">
+				<div class="flex-grow bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 font-medium text-center p-4 border border-slate-200 border-dashed">
+					[ IMAGE PLACEHOLDER ]
+				</div>
+				<p class="text-center font-medium text-slate-800 mt-4 text-sm h-10">Doctoral Degree in Oncology</p>
+			</div>
+			<!-- 4. Гинекология -->
+			<div class="diploma-slide snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.66rem)] bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col aspect-[3/4]">
+				<div class="flex-grow bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 font-medium text-center p-4 border border-slate-200 border-dashed">
+					[ IMAGE PLACEHOLDER ]
+				</div>
+				<p class="text-center font-medium text-slate-800 mt-4 text-sm h-10">Doctoral Degree in Gynecology</p>
+			</div>
+			<!-- 5. Маммология -->
+			<div class="diploma-slide snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.66rem)] bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col aspect-[3/4]">
+				<div class="flex-grow bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 font-medium text-center p-4 border border-slate-200 border-dashed">
+					[ IMAGE PLACEHOLDER ]
+				</div>
+				<p class="text-center font-medium text-slate-800 mt-4 text-sm h-10">Doctoral Degree in Mammology</p>
+			</div>
+			<!-- 6. Мемология -->
+			<div class="diploma-slide snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.66rem)] bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col aspect-[3/4]">
+				<div class="flex-grow bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 font-medium text-center p-4 border border-slate-200 border-dashed">
+					[ IMAGE PLACEHOLDER ]
+				</div>
+				<p class="text-center font-medium text-slate-800 mt-4 text-sm h-10">Doctoral Degree in Memology</p>
+			</div>
+			<!-- 7. Подкат -->
+			<div class="diploma-slide snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.66rem)] bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col aspect-[3/4]">
+				<div class="flex-grow bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 font-medium text-center p-4 border border-slate-200 border-dashed">
+					[ IMAGE PLACEHOLDER ]
+				</div>
+				<p class="text-center font-medium text-slate-800 mt-4 text-sm h-10">Course in the Art of Picking Up Minors</p>
+			</div>
+			<!-- 8. Актерское мастерство -->
+			<div class="diploma-slide snap-start shrink-0 w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.66rem)] bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col aspect-[3/4]">
+				<div class="flex-grow bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 font-medium text-center p-4 border border-slate-200 border-dashed">
+					[ IMAGE PLACEHOLDER ]
+				</div>
+				<p class="text-center font-medium text-slate-800 mt-4 text-sm h-10">Course in Acting</p>
+			</div>
+		</div>
+
+		<div class="hidden lg:flex justify-center gap-4 mt-6">
+			<button type="button" id="prev-diplomas" class="w-12 h-12 rounded-full bg-slate-200 text-slate-800 flex items-center justify-center transition shadow-sm text-xl font-bold focus:outline-none">
+				&#10094;
+			</button>
+			<button type="button" id="next-diplomas" class="w-12 h-12 rounded-full bg-slate-200 text-slate-800 flex items-center justify-center transition shadow-sm text-xl font-bold focus:outline-none">
+				&#10095;
+			</button>
+		</div>
+	</div>
+
+	<!-- ================= БЛОК 4: МОИ РАБОТЫ ================= -->
+	<div class="mt-8">
+		<WorksComponent />
+	</div>
+</BaseLayout>
+
+<script>
+	const track = document.getElementById('diplomas-track');
+	const prevBtn = document.getElementById('prev-diplomas');
+	const nextBtn = document.getElementById('next-diplomas');
+
+	function updateArrows() {
+		if (!track || !prevBtn || !nextBtn) return;
+		if (track.scrollLeft <= 5) {
+			prevBtn.classList.add('opacity-30', 'cursor-default');
+			prevBtn.classList.remove('hover:bg-slate-300', 'cursor-pointer');
+		} else {
+			prevBtn.classList.remove('opacity-30', 'cursor-default');
+			prevBtn.classList.add('hover:bg-slate-300', 'cursor-pointer');
+		}
+		if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 5) {
+			nextBtn.classList.add('opacity-30', 'cursor-default');
+			nextBtn.classList.remove('hover:bg-slate-300', 'cursor-pointer');
+		} else {
+			nextBtn.classList.remove('opacity-30', 'cursor-default');
+			nextBtn.classList.add('hover:bg-slate-300', 'cursor-pointer');
+		}
+	}
+
+	track?.addEventListener('scroll', updateArrows);
+	window.addEventListener('resize', updateArrows);
+	setTimeout(updateArrows, 100);
+
+	prevBtn?.addEventListener('click', () => {
+		const firstCard = track?.querySelector('.diploma-slide');
+		if (firstCard) {
+			const scrollAmount = firstCard.offsetWidth + 16;
+			track?.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+		}
+	});
+	nextBtn?.addEventListener('click', () => {
+		const firstCard = track?.querySelector('.diploma-slide');
+		if (firstCard) {
+			const scrollAmount = firstCard.offsetWidth + 16;
+			track?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+		}
+	});
+</script>
