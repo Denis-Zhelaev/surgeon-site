@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -19,6 +20,7 @@ jobs:
         uses: withastro/action@v3
         with:
           node-version: 22
+          package-manager: npm@latest
 
   deploy:
     needs: build
