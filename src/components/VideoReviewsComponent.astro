@@ -1,4 +1,5 @@
 ---
+const base = import.meta.env.BASE_URL;
 const locale = Astro.currentLocale || 'ru';
 
 const t = {
@@ -13,10 +14,10 @@ const t = {
 };
 const text = t[locale] || t.ru;
 
-const videos = Array(8).fill(null).map((_, i) => ({ 
-  id: i + 1, 
-  title: `${locale === 'ru' ? 'Видеоотзыв' : 'Video Review'} ${i + 1}`, 
-  src: '' 
+const videos = Array(8).fill(null).map((_, i) => ({
+    id: i + 1,
+    title: `${locale === 'ru' ? 'Видеоотзыв' : 'Video Review'} ${i + 1}`,
+    src: `${base}videos/reviews/${i + 1}.mp4` // Подставит пути .../1.mp4, .../2.mp4 и т.д.
 }));
 ---
 
