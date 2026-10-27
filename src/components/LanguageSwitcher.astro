@@ -1,18 +1,27 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
-
 const currentLocale = Astro.currentLocale || 'ru';
 const currentPath = Astro.url.pathname;
 const base = import.meta.env.BASE_URL;
 
-let cleanPath = currentPath;
-if (base !== '/') {
-    cleanPath = cleanPath.replace(base, '/');
-}
-const pathWithoutLocale = cleanPath.replace(/^\/(ru|en)/, '') || '/';
+// Убираем слэш в конце base, если он есть (например, /surgeon-site/ -> /surgeon-site)
+const basePrefix = base === '/' ? '' : base.replace(/\/$/, '');
 
-const ruUrl = getRelativeLocaleUrl('ru', pathWithoutLocale);
-const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
+// Получаем путь без учета base (например, /surgeon-site/ru/about -> /ru/about)
+const pathWithoutBase = currentPath.replace(base, '/');
+
+// Убираем язык из пути (например, /ru/about -> /about)
+let pathWithoutLocale = pathWithoutBase.replace(/^\/(ru|en)/, '');
+
+// Если путь пустой, ставим слэш
+if (pathWithoutLocale === '') {
+    pathWithoutLocale = '/';
+} else if (!pathWithoutLocale.startsWith('/')) {
+    pathWithoutLocale = '/' + pathWithoutLocale;
+}
+
+// Собираем финальные ссылки вручную
+const ruUrl = `${basePrefix}/ru${pathWithoutLocale}`;
+const enUrl = `${basePrefix}/en${pathWithoutLocale}`;
 ---
 
 <div class="flex items-center gap-1">
