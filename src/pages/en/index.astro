@@ -4,23 +4,21 @@ import ReviewsComponent from '../../components/ReviewsComponent.astro';
 import VideoReviewsComponent from '../../components/VideoReviewsComponent.astro';
 import WorksComponent from '../../components/WorksComponent.astro';
 import ContactFormComponent from '../../components/ContactFormComponent.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Home">
-	<!-- Первый экран (Hero Section) -->
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-6">
 		
-		<!-- Фото (плейсхолдер) -->
-		<!-- Фото -->
 		<div class="w-full max-w-md mx-auto aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden shadow-md order-1 md:order-2">
 			<img 
-			src="/images/doctor/doctor-photo1.png" 
-			alt="Олег Желаев" 
-			class="w-full h-full object-cover object-center"
+				src={`${base}images/doctor/doctor-photo1.png`} 
+				alt="Oleg Zhelaev" 
+				class="w-full h-full object-cover object-center"
 			/>
 		</div>
 
-		<!-- Текстовая часть -->
 		<div class="order-2 md:order-1 space-y-5">
 			<h1 class="text-3xl md:text-5xl font-bold text-slate-900 leading-tight">
 				Plastic Surgeon <br /> Oleg Zhelaev
@@ -30,23 +28,33 @@ import ContactFormComponent from '../../components/ContactFormComponent.astro';
 				My goal is not just to change appearance, but to help you find harmony and confidence in yourself.
 			</p>
 			
-			<!-- Кнопки -->
 			<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
 				<a href="#works" class="bg-white text-slate-900 border-2 border-slate-200 px-4 py-3 rounded-lg text-center font-medium hover:border-slate-400 hover:bg-slate-50 transition shadow-sm">
 					My Works
 				</a>
-				<a href="/en/about" class="bg-white text-slate-900 border-2 border-slate-200 px-4 py-3 rounded-lg text-center font-medium hover:border-slate-400 hover:bg-slate-50 transition shadow-sm">
+				<a href={`${base}en/about`} class="bg-white text-slate-900 border-2 border-slate-200 px-4 py-3 rounded-lg text-center font-medium hover:border-slate-400 hover:bg-slate-50 transition shadow-sm">
 					About Me
 				</a>
 			</div>
 		</div>
 	</div>
 
-	<!-- Блоки в нужном порядке -->
-	<ReviewsComponent />
-	<VideoReviewsComponent />
-	<WorksComponent />
+	<div class="mt-4 bg-slate-100 rounded-2xl p-6 md:p-10 text-center border border-slate-200">
+		<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Book a Consultation</h2>
+		<p class="text-slate-600 mb-6 max-w-xl mx-auto text-sm md:text-base">
+			Leave your contact details and I will get in touch with you to discuss the details, 
+			answer your questions, and schedule a consultation.
+		</p>
+		<div class="inline-block bg-white border border-slate-300 rounded-lg px-10 py-3 text-slate-400 font-medium shadow-sm">
+			[ APPLICATION FORM PLACEHOLDER ]
+		</div>
+	</div>
 
-	<!-- Блок с формой заявки -->
+	<div class="mt-12">
+		<ReviewsComponent />
+		<VideoReviewsComponent />
+		<WorksComponent />
+	</div>
+
 	<ContactFormComponent />
 </BaseLayout>

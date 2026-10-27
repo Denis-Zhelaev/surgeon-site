@@ -3,8 +3,14 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 
 const currentLocale = Astro.currentLocale || 'ru';
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
 
-const pathWithoutLocale = currentPath.replace(/^\/(ru|en)/, '') || '/';
+let cleanPath = currentPath;
+if (base !== '/') {
+    cleanPath = cleanPath.replace(base, '/');
+}
+const pathWithoutLocale = cleanPath.replace(/^\/(ru|en)/, '') || '/';
+
 const ruUrl = getRelativeLocaleUrl('ru', pathWithoutLocale);
 const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
 ---
